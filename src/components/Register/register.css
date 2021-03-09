@@ -1,0 +1,22 @@
+.register {
+	box-sizing: border-box;
+	max-width: 396px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 320px) {
+	.register {
+		height: 100vh;
+		padding-top: 56px;
+		padding-bottom: 40px;
+		max-width: 260px;
+		align-items: center;
+		justify-content: flex-start;
+	}
+}

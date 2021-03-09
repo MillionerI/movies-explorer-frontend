@@ -1,0 +1,23 @@
+.login {
+	box-sizing: border-box;
+	height: 100vh;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	max-width: 396px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 320px) {
+	.login {
+		height: 100vh;
+		max-width: 260px;
+		align-items: center;
+		padding-top: 56px;
+		padding-bottom: 40px;
+		justify-content: flex-start;
+	}
+}

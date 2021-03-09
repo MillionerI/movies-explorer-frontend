@@ -1,0 +1,74 @@
+.about-project__info {
+	margin: 70px 0 110px 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 10px;
+}
+
+.about-project__info-title {
+	margin: 0 0 16px 0;
+	padding: 0;
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: 400;
+}
+
+.about-project__info-text {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.about-project__track {
+	display: grid;
+	line-height: 17px;
+	text-align: center;
+	align-items: center;
+	grid-template-columns: 1fr 3fr;
+	grid-auto-rows: 36px;
+}
+
+.about-project__track-period {
+	padding: 9px 0;
+}
+
+.about-project__track-period_green {
+	background-color: #2be080;
+}
+
+.about-project__track-period_gray {
+	background-color: #f2f2f2;
+}
+
+.about-project__track-name {
+	color: #a0a0a0;
+}
+
+@media screen and (max-width: 768px) {
+	.about-project__info {
+		margin: 70px 0 93px 0;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.about-project__info {
+		margin: 60px 0 60px 0;
+		grid-template-columns: 1fr;
+		grid-row-gap: 56px;
+	}
+
+	.about-project__info-title {
+		font-size: 18px;
+		line-height: 22px;
+	}
+
+	.about-project__info-text {
+		font-size: 11px;
+		line-height: 16px;
+	}
+
+	.about-project__track {
+		font-size: 11px;
+	}
+}
