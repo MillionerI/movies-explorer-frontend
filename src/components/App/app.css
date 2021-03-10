@@ -1,0 +1,9 @@
+.app {
+	position: relative;
+  width: 100%;
+  color: #000;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-size: 14px;
+	font-weight: 400;
+}

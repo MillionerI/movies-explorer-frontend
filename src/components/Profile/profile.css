@@ -1,0 +1,35 @@
+.profile {
+	box-sizing: border-box;
+	padding-bottom: 70px;
+	padding-top: 74px;
+	height: 100vh;
+	width: 100%;
+	max-width: 410px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+.profile__line {
+	width: 100%;
+	height: 1px;
+	background-color: #e8e8e8;
+	margin: 16px 0 17px 0;
+}
+
+@media screen and (max-width: 768px) {
+	.profile {
+		height: 100%;
+		justify-content: center;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.profile {
+		height: calc(100vh - 74px);
+		max-width: 260px;
+		align-items: center;
+		padding-top: 0;
+		padding-bottom: 40px;
+	}
+}
