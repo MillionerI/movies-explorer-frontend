@@ -1,9 +1,9 @@
 import React from 'react';
 import arrow from './../../images/arrow.svg';
-import config from './../../config.js';
+import {configuration} from './../../config.js';
 
 export default function Portfolio() {
-	const { portfolio } = config;
+	const { portfolio } = configuration;
 
 	return(
 		<section className="portfolio">

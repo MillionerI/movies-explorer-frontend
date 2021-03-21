@@ -1,6 +1,6 @@
 import profileIcon from './images/profileIcon.svg'
 
-export default {
+export const configuration = {
 	mainMenuNavigation: [{
 		link: '/signup',
 		cNameItem: 'navigation__item',

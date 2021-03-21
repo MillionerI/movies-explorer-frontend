@@ -1,9 +1,9 @@
 import React from 'react';
 import Section from './../Section/Section.js';
-import config from './../../config.js';
+import {configuration} from './../../config.js';
 
 export default function Techs() {
-	const { techs } = config;
+	const { techs } = configuration;
 
 	return(
 		<Section cName="techs" title="Технологии" cNameWrap="section__wrapper_techs">

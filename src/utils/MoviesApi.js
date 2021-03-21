@@ -10,12 +10,6 @@ class MoviesApi {
     return (res.json().then((data) => Promise.reject(data.message)));
   }
 
-  // getAppInfo() {
-  //   return Promise.all([
-  //     this.getMoviesFromServer(),
-  //   ]);
-  // }
-
   getMoviesFromApi() {
     return fetch(`${this._baseUrl}`, {
       method: 'GET',

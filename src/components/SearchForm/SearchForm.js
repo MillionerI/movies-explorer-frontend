@@ -1,7 +1,7 @@
 import React from 'react';
 import searchFormBtn from './../../images/search-form-btn.svg'
 
-export default function SearchForm({ isHandleMovies }) {
+export default function SearchForm({ searchingMovies }) {
 	const [movieName, setMovieName] = React.useState('');
 	const [inputValidity, setInputValidity] = React.useState(true);
 	const checked = React.useRef();
@@ -11,7 +11,7 @@ export default function SearchForm({ isHandleMovies }) {
 	}
 
 	const handleCheckbox = () => {
-		isHandleMovies(movieName, checked.current.checked)
+		searchingMovies(movieName, checked.current.checked)
 	}
 
 	const inputValidator = (inputValue) => {
@@ -24,13 +24,13 @@ export default function SearchForm({ isHandleMovies }) {
 		}
 	}
 
-	const handleMoviesFromApi = (e) => {
+	const submitForm = (e) => {
 		e.preventDefault();
-		inputValidator(movieName) && isHandleMovies(movieName, checked.current.checked);
+		inputValidator(movieName) && searchingMovies(movieName, checked.current.checked);
 	}
 
 	return (
-		<form onSubmit={handleMoviesFromApi} name="search-form" action="#" className="search-form" >
+		<form onSubmit={submitForm} name="search-form" action="#" className="search-form" >
 			<fieldset className="search-form__fieldset">
 				<div className="search-form__input-wrapper">
 					<input onChange={handleMovieNameChange} className="search-form__input" placeholder="Фильм"/>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from './../MoviesCard/MoviesCard.js';
 
-export default function MoviesCardList({isSaveMoviesId, isSearch, searchResultsMovie, isSaveMovies, saveMovie, removeMovie}) {
+export default function MoviesCardList({movies, removeMovie, saveMovie, isSaveMoviesId, isSearch, isSearchError}) {
 	const location = useLocation().pathname;
 
   const [renderedMoviesCount, setRenderedMoviesCount] = React.useState(0);
@@ -37,9 +37,9 @@ export default function MoviesCardList({isSaveMoviesId, isSearch, searchResultsM
         setMoviesToMoreRenderCount(3);
       }
     } else {
-      setRenderedMoviesCount(isSaveMovies.length);
+      setRenderedMoviesCount(movies.length);
     }
-  }, [windowWidth, location, isSaveMovies.length]);
+  }, [windowWidth, location, movies.length]);
 
   const handleMoreClick = () => {
     setRenderedMoviesCount(renderedMoviesCount + MoviesToMoreRenderCount);
@@ -47,72 +47,34 @@ export default function MoviesCardList({isSaveMoviesId, isSearch, searchResultsM
 
   return (<>
       <ul className="movies-card-list">
-        { 
-        	location === '/movies' ?
-          (
-            searchResultsMovie &&
-                (
-                  searchResultsMovie.reduce((moviesToRender, movie) => {
-                    if (moviesToRender.length < renderedMoviesCount) {
-                      moviesToRender.push(
-                        <MoviesCard 
-                          isSaveMovies={isSaveMovies}
-                          isSaveMoviesId={isSaveMoviesId}
-                          movieData={movie}
-                          key={movie.id}
-                          saveMovie={saveMovie}
-                          removeMovie={removeMovie}
-                       />
-                      );
-                    }
-                    return moviesToRender;
-                  }, [])
-                )
-            // searchResultsMovie.map((movie) => (
-            //   <MoviesCard 
-            //     isSaveMovies={isSaveMovies}
-            //     isSaveMoviesId={isSaveMoviesId}
-            //     movieData={movie}
-            //     key={movie.id}
-            //     saveMovie={saveMovie}
-            //     removeMovie={removeMovie}
-            //   />))
-          )
-          :
+        {
+          movies &&
             (
-              isSaveMovies &&
-                  (
-                    isSaveMovies.reduce((moviesToRender, movie) => {
-                      if (moviesToRender.length < renderedMoviesCount) {
-                        moviesToRender.push(
-                          <MoviesCard 
-                            isSaveMoviesId={isSaveMoviesId}
-                            movieData={movie}
-                            key={movie._id}
-                            saveMovie={saveMovie}
-                            removeMovie={removeMovie}
-                          />
-                        );
-                      }
-                      return moviesToRender;
-                    }, [])
-                  )
+              movies.reduce((moviesToRender, movie) => {
+                if (moviesToRender.length < renderedMoviesCount) {
+                  moviesToRender.push(
+                    <MoviesCard 
+                      movieData={movie}
+                      saveMovie={saveMovie}
+                      removeMovie={removeMovie}
+                      isSaveMoviesId={isSaveMoviesId}
+                      key={movie.movieId}
+                    />
+                  );
+                }
+                return moviesToRender;
+              }, [])
             )
-
-          // ((isSaveMovies.length !== 0) &&
-          //   isSaveMovies.map((movie) => (
-          //     <MoviesCard 
-          //       isSaveMoviesId={isSaveMoviesId}
-          //       movieData={movie}
-          //       key={movie._id}
-          //       saveMovie={saveMovie}
-          //       removeMovie={removeMovie}
-          //     />))
-          // )
         }
       </ul>
-      {(location !== '/saved-movies' && searchResultsMovie.length > renderedMoviesCount) &&
-            <button onClick={handleMoreClick} className="movies__add-movies-btn">Ещё</button>}
-      {(isSearch && searchResultsMovie.length === 0) && <p className="movies-card-list__not-found">Ничего не найдено</p>}
+      {(isSearch && isSearchError) &&
+        <p className="movies-card-list__not-found">
+          Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз
+        </p>
+      }
+      {(location === '/saved-movies' && movies.length === 0) && <p className="movies-card-list__not-found">Ничего не найдено</p>}
+      {(location !== '/saved-movies' && movies.length > renderedMoviesCount) &&
+        <button onClick={handleMoreClick} className="movies__add-movies-btn">Ещё</button>}
+      {(isSearch && movies.length === 0) && <p className="movies-card-list__not-found">Ничего не найдено</p>}
   </>);
 }

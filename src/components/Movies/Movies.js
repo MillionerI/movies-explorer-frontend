@@ -5,28 +5,22 @@ import MoviesCardList from './../MoviesCardList/MoviesCardList.js';
 import Preloader from './../Preloader/Preloader.js';
 import Footer from './../Footer/Footer.js';
 
-export default function Movies({ isSaveMoviesId, isSaveMovies, isSearch, isHandleMovies, searchResultsMovie, 
-	saveMovie, removeMovie, isLoggedIn, isPreloader }) {
+export default function Movies({ isLoggedIn, movies, searchingMovies, removeMovie, saveMovie, isSaveMoviesId, isSearch, isSearchError, isPreloader}) {
 
 	return(
 		<section className="movies">
 			<Header isLoggedIn={isLoggedIn}/>
-			<SearchForm isHandleMovies={isHandleMovies} />
+			<SearchForm searchingMovies={searchingMovies} />
 			{
-				<MoviesCardList 
-					isSaveMoviesId={isSaveMoviesId}
-					isSearch={isSearch} 
-					isSaveMovies={isSaveMovies}
-					searchResultsMovie={searchResultsMovie} 
+				<MoviesCardList
+					movies={movies}
 					saveMovie={saveMovie}
 					removeMovie={removeMovie}
+					isSaveMoviesId={isSaveMoviesId}
+					isSearch={isSearch}
+					isSearchError={isSearchError}
 				/>
 			}
-{/*			{
-				// (!isPreloader && searchResultsMovie.length !== 0) &&
-				// <button className="movies__add-movies-btn">Ещё</button>
-				// (!isPreloader && isMoviesFromApi.length === 0 <p className="movies__not-found">Ничего не найдено</p>)
-			}*/}
 			{isPreloader && <Preloader />}
 			<Footer />
 		</section>

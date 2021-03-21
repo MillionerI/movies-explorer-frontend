@@ -11,12 +11,6 @@ class MainApi {
     return (res.json().then((data) => Promise.reject(data.message)));
   }
 
-  // getAppInfo(jwt) {
-  //   return Promise.all([
-  //     this.getUserInfo(jwt),
-  //   ]);
-  // }
-
   userRegistration(data) {
     return fetch(`${this._baseUrl}/signup`, {
     	

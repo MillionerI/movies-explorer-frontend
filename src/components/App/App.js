@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Redirect, Switch, useLocation, } from 'react-router-dom';
-// import Header from './../Header/Header.js';
 import Main from './../Main/Main';
 import Movies from './../Movies/Movies';
 import SavedMovies from './../SavedMovies/SavedMovies';
@@ -33,12 +32,13 @@ function App() {
 	const [infoTooltipMessage, setinfoTooltipMessage] = React.useState('');
 
   const [isSearch, setIsSearch] = React.useState(false);
-	const [moviesFromApi, setMoviesFromApi] = React.useState([]);
   const [searchResultsMovie, setSearchResultsMovie] = React.useState([]);
 
 	const [saveMovies, setSaveMovies] = React.useState([]);
   const [saveMoviesId, setSaveMoviesId] = React.useState([]);
   const [searchSavedMovies, setSearchSavedMovies] = React.useState([]);
+
+  const [searchError, setSearchError] = React.useState(false);
 
 	const [preloader, setPreloader] = React.useState(false);
 
@@ -56,10 +56,10 @@ function App() {
         setLoggedIn(true);
       })
       .catch((error) => {
-       //  setLoggedIn(false);
-      	// setInfoTooltip(true);
-      	// setInfoTooltipStatus('red');
-       //  setinfoTooltipMessage(error);
+        setLoggedIn(false);
+      	setInfoTooltip(true);
+      	setInfoTooltipStatus('red');
+        setinfoTooltipMessage(error);
       })
       .finally(() => {
         setIsTokenChecked(true);
@@ -86,11 +86,13 @@ function App() {
     if(token) {
       MainApi.getMovie(token)
         .then((infoFromServer) => {
-          setSaveMovies(infoFromServer.reverse());
+          setSaveMovies(infoFromServer);
           setSaveMoviesId(infoFromServer.map((movie) => movie.movieId));
           setSearchSavedMovies(infoFromServer.reverse());
         })
-        .catch((e) => console.log(e))
+        .catch((error) => {
+          console.log(error);
+        })
       if(searchMovie) {
         const localStorageMovie = JSON.parse(searchMovie);
         setSearchResultsMovie(localStorageMovie);
@@ -110,7 +112,6 @@ function App() {
       .catch((error) => {
       	setAuthErrorStatus(true);
         setAuthErrorMessage(error);
-       console.log(error)
       })
       .finally(() => {
         setIsFormDisabled(false)
@@ -167,11 +168,11 @@ function App() {
           localStorage.setItem('search-movies', JSON.stringify(searchFilterResult));
           movies = formattedMovie;
           setSearchResultsMovie(searchFilterResult);
+          setSearchError(false);
         })
-        .catch((error) => {
-          setInfoTooltip(true);
-          setInfoTooltipStatus('red');
-          setinfoTooltipMessage(error);
+        .catch(() => {
+          setIsSearch(true);
+          setSearchError(true);
         })
         .finally(() => {
           setPreloader(false);
@@ -182,6 +183,7 @@ function App() {
         setSearchResultsMovie(searchFilterResult);
         localStorage.setItem('search-movies', JSON.stringify(searchFilterResult));
         setIsSearch(true);
+        setSearchError(false);
     }
   }
 
@@ -196,9 +198,12 @@ function App() {
         setSaveMovies([newMovie, ...saveMovies])
         setSaveMoviesId([newMovie.movieId, ...saveMoviesId]);
         setSearchSavedMovies([newMovie, ...saveMovies]);
-        console.log('сохранил', newMovie.movieId)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+          setInfoTooltip(true);
+          setInfoTooltipStatus('red');
+          setinfoTooltipMessage(error);
+      })
   }
 
     const removeMovie = ({movieId}) => {
@@ -212,7 +217,11 @@ function App() {
           setSearchSavedMovies(filteredMovies);
           setSaveMoviesId(filteredMoviesId);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          setInfoTooltip(true);
+          setInfoTooltipStatus('red');
+          setinfoTooltipMessage(error);
+        })
   }
 
 	return (
@@ -249,23 +258,23 @@ function App() {
   					<ProtectedRoute
   						path="/movies"
   						isLoggedIn={loggedIn}
-              isSaveMoviesId={saveMoviesId}
-  						isPreloader={preloader}
-              isSearch={isSearch}
-              isSaveMovies={saveMovies}
-  						isHandleMovies={searchMovies}
-  						searchResultsMovie={searchResultsMovie}
-              saveMovie={saveMovie}
+              movies={searchResultsMovie}
+              searchingMovies={searchMovies}
               removeMovie={removeMovie}
+              saveMovie={saveMovie}
+              isSaveMoviesId={saveMoviesId}
+              isSearch={isSearch}
+              isSearchError={searchError}
+  						isPreloader={preloader}
   						component={Movies}
   					/>
   					<ProtectedRoute
   						path="/saved-movies"
   						isLoggedIn={loggedIn}
-              isSaveMoviesId={saveMoviesId}
-              isSaveMovies={searchSavedMovies}
-              isHandleMovies={searchSaveMovies}
+              movies={searchSavedMovies}
+              searchingMovies={searchSaveMovies}
               removeMovie={removeMovie}
+              isSaveMoviesId={saveMoviesId}
   						component={SavedMovies}
   					/>
   					<ProtectedRoute

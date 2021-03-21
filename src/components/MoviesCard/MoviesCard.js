@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import defaultMoviImage from './../../images/defaultMoviImage.svg'
 import getTimeFromMins from './../../utils/getTimeFromMins'
 
-export default function MoviesCard({isSaveMoviesId, isSaveMovies, movieData, saveMovie, removeMovie}) {
+export default function MoviesCard({movieData, removeMovie, saveMovie, isSaveMoviesId}) {
   const {image, nameRU, duration, trailer, movieId} = movieData;
   const [isSaved, setSaved] = React.useState(false);
   const location = useLocation().pathname;
