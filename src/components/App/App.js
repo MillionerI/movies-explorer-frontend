@@ -209,24 +209,11 @@ function App() {
           const filteredMovies = saveMovies.filter((movie) => movie.movieId !== movieId);
           const filteredMoviesId = saveMoviesId.filter((id) => id !== movieId);
           setSaveMovies(filteredMovies);
-          // setSearchSavedMovies(filteredMovies);
+          setSearchSavedMovies(filteredMovies);
           setSaveMoviesId(filteredMoviesId);
         })
         .catch((error) => console.log(error))
   }
-
-  // const removeMovie = (movieId, idm) => {
-  //   const token = localStorage.getItem('jwt');
-  //   MainApi.removeMovie(movieId, token)
-  //     .then((remove) => {
-  //       console.log(remove)
-  //       const filteredMovies = saveMovies.filter((movie) => (movie._id !== movieId && movie.movieId !== idm));
-  //       const filteredMoviesId = saveMoviesId.filter((id) => (id !== movieId && id !== idm));
-  //       setSaveMovies(filteredMovies);
-  //       setSaveMoviesId(filteredMoviesId);
-  //     })
-  //     .catch((error) => console.log(error))
-  // }
 
 	return (
 		<CurrentUserContext.Provider value={currentUser}>
@@ -276,7 +263,7 @@ function App() {
   						path="/saved-movies"
   						isLoggedIn={loggedIn}
               isSaveMoviesId={saveMoviesId}
-              isSaveMovies={saveMovies}
+              isSaveMovies={searchSavedMovies}
               isHandleMovies={searchSaveMovies}
               removeMovie={removeMovie}
   						component={SavedMovies}
