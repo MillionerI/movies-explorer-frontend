@@ -42,3 +42,6 @@
 
 /*Not found*/
 @import url(./components/NotFound/not-found.css);
+
+/*InfoTooltip*/
+@import url(./components/InfoTooltip/info-tooltip.css);

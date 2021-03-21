@@ -1,0 +1,26 @@
+.info-tooltip {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	max-width: 300px;
+	width: 100%;
+	background-color: transparent;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.info-tooltip_green {
+	border: 2px solid #2be080;
+}
+
+.info-tooltip_red {
+	border: 2px solid #FF3055;
+}
+
+.info-tooltip_hidden {
+	display: none;
+}
+
+.info-tooltip__text {
+	padding: 5px;
+}

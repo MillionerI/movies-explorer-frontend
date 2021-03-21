@@ -8,6 +8,14 @@
 	grid-row-gap: 38px;
 }
 
+.movies-card-list__not-found {
+	padding: 0;
+	margin: 0 auto;
+	color: #a0a0a0;
+	font-size: 16px;
+	line-height: 24px;
+}
+
 @media screen and (max-width: 768px) {
 	.movies-card-list {
 		grid-template-columns: repeat(auto-fill, minmax(min-content, 339px));
