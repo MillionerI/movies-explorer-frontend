@@ -1,1 +1,1 @@
-# Use: npm install and npm run start
+# [Сайт тут](http://diplom.students.nomoredomains.rocks/)
