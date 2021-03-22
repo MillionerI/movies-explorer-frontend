@@ -1,0 +1,40 @@
+.info-tooltip {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%);
+	max-width: 300px;
+	width: 100%;
+	text-align: center;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.info-tooltip_green {
+	border: 2px solid #2be080;
+}
+
+.info-tooltip_red {
+	border: 2px solid #FF3055;
+}
+
+.info-tooltip_hidden {
+	display: none;
+}
+
+.info-tooltip__close {
+	display: block;
+	width: 100%;
+	max-width: 15px;
+	margin-left: auto;
+	margin-top: 5px;
+	margin-right: 5px;
+	font-size: 15px;
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.info-tooltip__text {
+	margin-top: 0;
+	padding: 5px;
+}

@@ -4,12 +4,12 @@ import SearchForm from './../SearchForm/SearchForm.js';
 import MoviesCardList from './../MoviesCardList/MoviesCardList.js';
 import Footer from './../Footer/Footer.js';
 
-export default function SavedMovies({isLoggedIn}) {
+export default function SavedMovies({isLoggedIn, movies, searchingMovies, removeMovie, isSaveMoviesId}) {
 	return(
 		<section className="movies">
 			<Header isLoggedIn={isLoggedIn}/>
-			<SearchForm />
-			<MoviesCardList />
+			<SearchForm searchingMovies={searchingMovies} />
+			<MoviesCardList movies={movies} removeMovie={removeMovie} isSaveMoviesId={isSaveMoviesId}/>
 			<Footer />
 		</section>
 	)

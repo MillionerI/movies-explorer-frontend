@@ -8,11 +8,15 @@
 	width: 100%;
 	height: 151px;
 	margin-bottom: 14px;
+	object-fit: cover;
+	object-position: center;
+	cursor: pointer;
 }
 
 .movie-card__wrapper {
 	display: flex;
 	justify-content: space-between;
+	text-align: left;
 }
 
 .movie-card__title {

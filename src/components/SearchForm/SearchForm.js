@@ -1,17 +1,45 @@
 import React from 'react';
 import searchFormBtn from './../../images/search-form-btn.svg'
 
-export default function SearchForm() {
+export default function SearchForm({ searchingMovies }) {
+	const [movieName, setMovieName] = React.useState('');
+	const [inputValidity, setInputValidity] = React.useState(true);
+	const checked = React.useRef();
+
+	const handleMovieNameChange = (e) => {
+		setMovieName(e.target.value);
+	}
+
+	const handleCheckbox = () => {
+		searchingMovies(movieName, checked.current.checked)
+	}
+
+	const inputValidator = (inputValue) => {
+		if(inputValue.length >= 2) {
+			setInputValidity(true);
+			return true;
+		} else{
+			setInputValidity(false);
+			return false;
+		}
+	}
+
+	const submitForm = (e) => {
+		e.preventDefault();
+		inputValidator(movieName) && searchingMovies(movieName, checked.current.checked);
+	}
+
 	return (
-		<form name="search-form" action="#" className="search-form" >
+		<form onSubmit={submitForm} name="search-form" action="#" className="search-form" >
 			<fieldset className="search-form__fieldset">
 				<div className="search-form__input-wrapper">
-					<input className="search-form__input" placeholder="Фильм" required />
+					<input onChange={handleMovieNameChange} className="search-form__input" placeholder="Фильм"/>
 					<button className="search-form__button"><img src={searchFormBtn} alt="Поиск" className="search-form__button-img" /></button>
 				</div>
+				{!inputValidity && <p className="search-form__error">Нужно ввести ключевое слово</p>}
 				<label className="search-form__checkbox-label">
 				<div className="search-form__checkbox-wrapper">
-					<input type="checkbox" className="search-form__checkbox" defaultChecked/>
+					<input ref={checked} onClick={handleCheckbox} type="checkbox" className="search-form__checkbox" defaultChecked/>
 					<div className="search-form__checkbox-span" />
 					<span className="search-form__checkbox-indicator" />
 				</div>

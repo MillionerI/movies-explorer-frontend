@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import config from './../../config.js';
+import {configuration} from './../../config.js';
 
 export default function MovieMenu({isMobile=false}) {
-	const { movieMenuNavigation } = config;
+	const { movieMenuNavigation } = configuration;
 
 	return(
 		<nav className={isMobile? "navigation navigation-mobile" : "navigation"}>

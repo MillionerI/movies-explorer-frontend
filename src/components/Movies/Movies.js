@@ -1,21 +1,26 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import Header from './../Header/Header.js';
 import SearchForm from './../SearchForm/SearchForm.js';
 import MoviesCardList from './../MoviesCardList/MoviesCardList.js';
 import Preloader from './../Preloader/Preloader.js';
 import Footer from './../Footer/Footer.js';
 
-export default function Movies({isLoggedIn, isPreloader}) {
-
-	const location = useLocation().pathname;
+export default function Movies({ isLoggedIn, movies, searchingMovies, removeMovie, saveMovie, isSaveMoviesId, isSearch, isSearchError, isPreloader}) {
 
 	return(
 		<section className="movies">
 			<Header isLoggedIn={isLoggedIn}/>
-			<SearchForm />
-			<MoviesCardList />
-			{location === '/movies' && <button className="movies__add-movies-btn">Ещё</button>}
+			<SearchForm searchingMovies={searchingMovies} />
+			{
+				<MoviesCardList
+					movies={movies}
+					saveMovie={saveMovie}
+					removeMovie={removeMovie}
+					isSaveMoviesId={isSaveMoviesId}
+					isSearch={isSearch}
+					isSearchError={isSearchError}
+				/>
+			}
 			{isPreloader && <Preloader />}
 			<Footer />
 		</section>

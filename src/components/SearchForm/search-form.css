@@ -58,6 +58,16 @@
 	margin: 0 auto;
 }
 
+.search-form__error {
+	padding: 0;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	font-size: 13px;
+	line-height: 24px;
+	text-align: left;
+	color: #FF3055;
+}
+
 .search-form__checkbox-label {
 	display: flex;
 	position: relative;

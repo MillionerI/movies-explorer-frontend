@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import config from './../../config.js';
+import {configuration} from './../../config.js';
 
 export default function MainMenu() {
-	const { mainMenuNavigation } = config;
+	const { mainMenuNavigation } = configuration;
 
 	return(
 		<nav className="navigation navigation_visible">
